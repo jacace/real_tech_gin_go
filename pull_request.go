@@ -22,23 +22,27 @@ func NewPullRequest() *PullRequest {
 	}
 }
 
-func (pr *PullRequest) GetSize() (int, error) {
+func (pr *PullRequest) GetSize(personalAccessToken string) (int, error) {
 
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: ""},
+		&oauth2.Token{AccessToken: personalAccessToken},
 	)
 
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
 
-	ops := &github.RepositoryListOptions{
-		Visibility: "public",
+	ops := &github.PullRequestListOptions{
+		State:     "Closed",
+		Base:      "main",
+		Sort:      "created",
+		Direction: "asc",
 	}
-	repos, _, err := client.Repositories.List(ctx, "jacace", ops)
+
+	prs, _, err := client.PullRequests.List(ctx, "jacace", "real_tech_gin_go", ops)
 
 	if err == nil {
-		pr.size = len(repos)
+		pr.size = len(prs)
 		return pr.size, nil
 	}
 

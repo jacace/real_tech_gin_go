@@ -4,7 +4,7 @@ import "testing"
 
 func TestGetSize(t *testing.T) {
 	pr := NewPullRequest()
-	size, err := pr.GetSize()
+	size, err := pr.GetSize("")
 
 	if err != nil {
 		t.Fatal("Error fecthing PR size")
