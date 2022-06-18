@@ -14,7 +14,7 @@ func NewPullRequest() *PullRequest {
 	}
 }
 
-func (prs *PullRequest) getSize() error {
-	prs.size = 0 // place holder to call github API
-	return nil
+func (pr *PullRequest) GetSize() (int, error) {
+	pr.size = 0 // place holder to call github API
+	return pr.size, nil
 }

@@ -1,8 +1,8 @@
 # Project to analyze github requests
 
 ## Intro
-Initial goal is to get current team metrics to set goals for future improvements.
-According to LinearB Labs' [research] (https://www.youtube.com/watch?v=r6v5R7zkbgE), 50% of PRs are idle 81.3/ of lifespan (based on a sample of 733.4K PRs, 3.9 M comments and 25.6K Developers)
+Initial goal is to get current PR size and lyfecycle metrics to set goals for future improvements.
+According to LinearB Labs' [research](https://www.youtube.com/watch?v=r6v5R7zkbgE), 50% of PRs are idle 81.3/ of lifespan (based on a sample of 733.4K PRs, 3.9 M comments and 25.6K Developers)
 
 
 ## Pull Size Request Best Practices
