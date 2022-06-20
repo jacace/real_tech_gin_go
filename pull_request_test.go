@@ -4,7 +4,7 @@ import "testing"
 
 func TestGetSize(t *testing.T) {
 	client := NewGitHubAPI("")
-	pr, err := client.GetSize("", "")
+	pr, err := client.GetSize("jacace", "real_tech_gin_go")
 
 	if err != nil {
 		t.Fatal("Error fecthing PR size")

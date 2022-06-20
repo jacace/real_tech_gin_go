@@ -2,9 +2,11 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"io/ioutil"
 
 	"github.com/google/go-github/v45/github"
+
+	"net/http"
 
 	"golang.org/x/oauth2"
 )
@@ -48,11 +50,24 @@ func (pr *GitHubAPI) GetSize(user string, repo string) (*PullRequest, error) {
 	if err == nil {
 		for _, a := range prs {
 			//a.GetClosedAt()
-			urls := a.GetCommitsURL()
-			fmt.Println("Commits URL:" + urls)
+			resGet, err := http.Get(a.GetCommitsURL())
+
+			if err == nil {
+				respBody, err := ioutil.ReadAll(resGet.Body)
+				if err == nil {
+					str := string(respBody)
+					if str != "" {
+						str = ""
+					}
+				}
+				resGet.Body.Close()
+			}
 
 			pr := &PullRequest{
 				leadTimeHrs: (a.GetMergedAt().Sub(a.GetCreatedAt())).Hours(),
+				timeToMerge: 0,
+				discussions: a.GetComments(),
+				size:        0,
 			}
 
 			return pr, nil
